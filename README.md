@@ -1,7 +1,7 @@
 # Emulatore CPU 32-bit con Assembler e Grafica OpenGL
 
 <div align="center">
-  <img src="assets/eagle32.webp" alt="Header" width="600"/>
+  <img src="assets/eagle32.webp" alt="Header" width="350"/>
 </div>
 
 Questo progetto è un emulatore di una CPU 32-bit sviluppato in C, dotato di un set di istruzioni base (MOV, ADD, SUB, LOAD, STORE, JMP, DRAW), supporto grafico tramite SDL2 e OpenGL, e un semplice assemblatore per convertire codice assembly in codice macchina eseguibile dall'emulatore.
