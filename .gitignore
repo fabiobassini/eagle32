@@ -1,0 +1,28 @@
+# File oggetto compilati
+*.o
+
+*.bin
+
+# File eseguibili generati
+emulator
+assembler
+
+# File binari prodotti dall'assembler (se non si desidera versionarli)
+*.bin
+
+# File temporanei ed editor
+*~
+*.swp
+*.swo
+
+# Directory di build temporanee
+/build/
+
+# Directory di test
+/test
+
+# File e cartelle specifici di sistema operativo/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
