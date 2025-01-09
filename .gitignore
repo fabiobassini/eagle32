@@ -1,14 +1,15 @@
 # File oggetto compilati
 *.o
 
+# File binari (potrebbero essere prodotti dall'assembler o dall'emulatore)
 *.bin
 
-# File eseguibili generati
-# emulator
-# assembler
-
-# File binari prodotti dall'assembler (se non si desidera versionarli)
-*.bin
+# File eseguibili generati (file che iniziano con 'emulator' o 'assembler')
+# ma NON escludere le cartelle con lo stesso nome
+emulator*
+assembler*
+!emulator/
+!assembler/
 
 # File temporanei ed editor
 *~
