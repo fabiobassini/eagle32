@@ -11,6 +11,8 @@ assembler*
 !emulator/
 !assembler/
 
+note.md
+
 # File temporanei ed editor
 *~
 *.swp

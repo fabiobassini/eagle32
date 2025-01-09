@@ -41,6 +41,16 @@ static int find_label_address(const char *name)
     return -1;
 }
 
+const ParsedLine *get_parsed_lines()
+{
+    return g_parsedLines;
+}
+
+int get_line_used()
+{
+    return g_lineUsed;
+}
+
 // Aggiunge una label con address
 static void add_label(const char *name, int addr)
 {
@@ -348,8 +358,17 @@ int assemble_file(const char *input_filename, const char *output_filename)
             break;
         }
 
+        // uint32_t final = make_instr(opcode, payload);
+        // fwrite(&final, sizeof(uint32_t), 1, fout);
+
         uint32_t final = make_instr(opcode, payload);
-        fwrite(&final, sizeof(uint32_t), 1, fout);
+        uint8_t bytes[4];
+        bytes[0] = (final >> 24) & 0xFF;
+        bytes[1] = (final >> 16) & 0xFF;
+        bytes[2] = (final >> 8) & 0xFF;
+        bytes[3] = final & 0xFF;
+
+        fwrite(bytes, 1, 4, fout);
     }
 
     fclose(fout);

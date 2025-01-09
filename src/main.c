@@ -24,10 +24,23 @@ static size_t load_program_into_memory(const char *filename)
     uint32_t instruction;
     uint32_t addr = 0;
 
+    // while (fread(&instruction, sizeof(uint32_t), 1, f) == 1)
+    // {
+    //     bus_write_word(addr, instruction);
+    //     addr += 4;
+    //     printf("LETTI 4 BYTE: 0x%08X -> bus_write_word(0x%X)\n", instruction, addr - 4);
+
+    //     bytes_read += sizeof(uint32_t);
+    // }
+
     while (fread(&instruction, sizeof(uint32_t), 1, f) == 1)
     {
-        bus_write_word(addr, instruction);
+        uint32_t swapped = ((instruction & 0xFF) << 24) | ((instruction & 0xFF00) << 8) | ((instruction & 0xFF0000) >> 8) | ((instruction & 0xFF000000) >> 24);
+
+        printf("SWAP 0x%08X => 0x%08X\n", instruction, swapped);
+        bus_write_word(addr, swapped);
         addr += 4;
+
         bytes_read += sizeof(uint32_t);
     }
 

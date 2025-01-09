@@ -12,6 +12,8 @@
 static inline uint32_t fetch_instruction(CPU *cpu)
 {
     uint32_t instr = bus_read_word(cpu->pc);
+    printf("PC=0x%08X => instr=0x%08X\n", cpu->pc, instr);
+
     cpu->pc += 4;
     return instr;
 }
@@ -237,6 +239,8 @@ static int execute_instruction(CPU *cpu, Opcode op, uint32_t instruction)
         uint32_t x = registers_read(&cpu->regs, rx);
         uint32_t y = registers_read(&cpu->regs, ry);
         uint32_t color = registers_read(&cpu->regs, rc);
+
+        printf("[DEBUG] DRAW -> (x=%u, y=%u, color=0x%06X)\n", x, y, color);
         graphics_draw(x, y, color);
         break;
     }
