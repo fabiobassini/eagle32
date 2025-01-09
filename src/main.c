@@ -7,6 +7,8 @@
 #include <SDL2/SDL.h>
 #include "cpu/registers.h" // Includi il modulo registri se necessario
 
+// https : // chatgpt.com/c/677e43cc-ded0-800a-8dc6-ec39f29d9c63
+
 int main()
 {
     memory_init();
