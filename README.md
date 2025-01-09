@@ -71,4 +71,3 @@ Compilando tale sorgente con l’assembler, otterrai un `.bin` che, caricato nel
 
 ---
 
-Speriamo che questo progetto possa essere un’ottima base didattica e un trampolino di lancio per ulteriori sperimentazioni nel mondo dell’emulazione e dei sistemi low-level!
