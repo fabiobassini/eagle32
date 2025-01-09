@@ -45,8 +45,23 @@ void graphics_init()
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    glClearColor(0.f, 0.f, 0.f, 1.f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    // glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    // glClear(GL_COLOR_BUFFER_BIT);
+    // SDL_GL_SwapWindow(window); // <--
+
+    // Cancella lo schermo usando il colore di "default" (non definito ufficialmente, ma spesso nero)
+    // glClear(GL_COLOR_BUFFER_BIT);
+
+    // Disegniamo un QUAD nero a copertura di tutta la finestra
+    glColor3ub(0, 0, 0); // imposta colore nero
+    glBegin(GL_QUADS);
+    glVertex2f(0.0f, 0.0f);
+    glVertex2f(640.0f, 0.0f);
+    glVertex2f(640.0f, 480.0f);
+    glVertex2f(0.0f, 480.0f);
+    glEnd();
+
+    // Mostriamo il buffer sullo schermo
     SDL_GL_SwapWindow(window);
 }
 
