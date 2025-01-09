@@ -4,8 +4,8 @@
 *.bin
 
 # File eseguibili generati
-emulator
-assembler
+# emulator
+# assembler
 
 # File binari prodotti dall'assembler (se non si desidera versionarli)
 *.bin
