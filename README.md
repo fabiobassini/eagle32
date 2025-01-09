@@ -1,73 +1,72 @@
-# Emulatore CPU 32-bit con Assembler e Grafica OpenGL
+# 32-bit CPU Emulator with Assembler and OpenGL Graphics
 
 <div align="center">
   <img src="assets/eagle32.webp" alt="Header" width="350"/>
 </div>
 
-Questo progetto è un emulatore di una **CPU a 32 bit** sviluppato in C, che include:
+This project is a **32-bit CPU** emulator written in C, featuring:
 
-- Un set di istruzioni esteso (ad esempio: `MOV`, `MOVI`, `ADD`, `SUB`, `AND`, `OR`, `XOR`, `NOT`, `SHL`, `SHR`, `LOAD`, `STORE`, `JMP`, `JEQ`, `JNE`, `PUSH`, `POP`, `CALL`, `RET`, `DRAW`)  
-- Una ALU con corretta **gestione dei flag** (Zero, Carry/Borrow, Sign, Overflow)  
-- Un’unità di controllo (Control Unit) e un **insieme di registri** (general-purpose)  
-- Un **bus** unificato per memoria e I/O  
-- **SDL2 + OpenGL** per il **rendering 2D** (l’istruzione `DRAW` consente di disegnare pixel in una finestra)  
-- Un **Assembler** (separato in un proprio eseguibile) che traduce il codice assembly in un file `.bin` eseguibile dall’emulatore
+- An extended set of instructions (e.g., `MOV`, `MOVI`, `ADD`, `SUB`, `AND`, `OR`, `XOR`, `NOT`, `SHL`, `SHR`, `LOAD`, `STORE`, `JMP`, `JEQ`, `JNE`, `PUSH`, `POP`, `CALL`, `RET`, `DRAW`)  
+- An ALU with **proper flag handling** (Zero, Carry/Borrow, Sign, Overflow)  
+- A Control Unit and **general-purpose registers**  
+- A **unified bus** for memory and I/O  
+- **SDL2 + OpenGL** for **2D rendering** (the `DRAW` instruction allows pixel-level drawing in a window)  
+- A **standalone Assembler** that converts assembly code into a `.bin` file executable by the emulator
 
-## Caratteristiche Principali
+## Main Features
 
-1. **CPU Emulata**  
-   - Set di istruzioni base ampliato, con supporto per istruzioni aritmetiche, logiche, salti condizionali e subroutine.  
-   - Pipeline semplice: fetch, decode, execute.
+1. **Emulated CPU**  
+   - A broader instruction set with arithmetic, logical, conditional jumps, and subroutines.  
+   - A simple pipeline: fetch, decode, execute.
 
-2. **Memoria e Bus**  
-   - Simulazione di una memoria lineare (fino a 1 MB) e di un bus per comunicare con I/O e dispositivi esterni.  
+2. **Memory & Bus**  
+   - Simulates a linear memory space (up to 1 MB) and a bus for communicating with I/O and other devices.  
 
-3. **I/O e Interrupt (Futuro)**  
-   - Al momento, funzioni di input/output basilari (`io_read`, `io_write`).  
-   - Possibile estensione futura per gestire interrupt e periferiche più avanzate.
+3. **I/O & Interrupts (future)**  
+   - Currently offers basic I/O functions (`io_read`, `io_write`).  
+   - Potential future extensions for interrupts and more advanced peripherals.
 
-4. **Grafica**  
-   - Usa SDL2 e OpenGL per disegnare punti (pixel) in modalità 2D ortografica.  
-   - L’istruzione `DRAW R_x, R_y, R_color` consente di disegnare un singolo pixel, aggiornato in tempo reale.
+4. **Graphics**  
+   - Uses SDL2 and OpenGL for 2D drawing in orthographic mode.  
+   - The `DRAW R_x, R_y, R_color` instruction draws a single pixel in real time.
 
 5. **Assembler**  
-   - Supporta la conversione di un sottoinsieme di istruzioni assembly in codice macchina (`.bin`).  
-   - Gestisce label, direttive (`.db`) e due pass (primo pass per label, secondo per la generazione binaria).
+   - A two-pass assembler that supports label resolution, `.db` directives for raw data, etc.  
+   - Translates a subset of assembly instructions into a machine code file (`.bin`).
 
-## Esempio: Disegnare un “cerchio vuoto” (anello)
+## Example: Drawing a “Hollow Circle” (Ring)
 
-Nel repository troverai un esempio di codice assembly (`circle.asm`) che disegna un anello rosso al centro dello schermo, sfruttando istruzioni come `CALL mul`, `JEQ`, e `DRAW`.  
-Compilando tale sorgente con l’assembler, otterrai un `.bin` che, caricato nell’emulatore, mostrerà il disegno.
+In the repository, you’ll find an assembly example (`circle.asm`) that draws a red ring in the center of the screen, using instructions like `CALL mul`, `JEQ`, and `DRAW`.  
+By compiling that assembly with the assembler, you get a `.bin` file that, when loaded into the emulator, shows the ring.
 
-## Come Compilare
+## How to Build
 
-1. **Emulatore**:  
-   - Usa il tuo build system (ad es. `make`) per generare l’eseguibile `emulator`.  
+1. **Emulator**:  
+   - Use your build system (e.g., `make`) to generate the `emulator` executable.  
 2. **Assembler**:  
-   - Allo stesso modo, compila il progetto `assembler` per ottenere un eseguibile `assembler`.  
-3. **Esecuzione**:  
-   - Assembla un file assembly in un file `.bin`:  
+   - Likewise, compile the `assembler` project to get an `assembler` executable.  
+3. **Execution**:  
+   - Assemble an assembly file into a `.bin` file:  
      ```bash
      ./assembler myprog.asm myprog.bin
      ```
-   - Esegui nell’emulatore:  
+   - Run it in the emulator:  
      ```bash
      ./emulator myprog.bin
      ```
 
-## Stato Attuale
+## Current Status
 
-- **Set di istruzioni**: completato con istruzioni di base + condizionali + subroutine + `DRAW`.  
-- **ALU con Flag**: implementata gestione dei flag (Zero, Carry/Borrow, Sign, Overflow).  
-- **Assembler**: funzionante, con due pass (label + generazione). Supporta `.db` per dati raw.  
-- **Grafica**: disegno di pixel, con esempi di base (es. disegno di linee, cerchi/anelli).  
+- **Instruction Set**: Complete with basic ops, conditionals, subroutines, and `DRAW`.  
+- **ALU with Flags**: Implemented with Zero, Carry/Borrow, Sign, and Overflow.  
+- **Assembler**: Fully functional two-pass assembly, supporting `.db` for raw data.  
+- **Graphics**: Pixel drawing with basic examples (drawing lines, circles/rings, etc.).
 
-## Possibili Estensioni Future
+## Future Extensions
 
-- **Interrupt hardware** e gestione di timer/I/O asincroni  
-- **Modalità debug** con disassemblatore integrato e breakpoint  
-- **Pipeline più complessa** (stall, forwarding, ecc.)  
-- **Caching, paging** e protezione memoria per un vero micro-OS didattico
+- **Hardware interrupts** and asynchronous I/O/timer handling  
+- **Debug mode** with integrated disassembler and breakpoints  
+- **More complex pipeline** (stalling, forwarding, etc.)  
+- **Caching, paging**, and memory protection for an instructional micro-OS
 
 ---
-
