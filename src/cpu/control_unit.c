@@ -1,27 +1,54 @@
-// control_unit.c
-#include "control_unit.h"
+#include "cpu/control_unit.h"
+#include "cpu/opcode.h"
 
-ControlSignal decode_instruction(uint32_t instruction, CPU *cpu)
+Opcode decode_instruction(uint32_t instruction)
 {
-    uint8_t opcode = (instruction >> 24) & 0xFF;
+    // L'opcode è nei bit 31..24
+    uint8_t opcode_byte = (instruction >> 24) & 0xFF;
 
-    switch (opcode)
+    switch (opcode_byte)
     {
-    case 0x01:
-        return CTRL_MOV;
-    case 0x02:
-        return CTRL_ADD;
-    case 0x03:
-        return CTRL_SUB;
-    case 0x10:
-        return CTRL_LOAD;
-    case 0x11:
-        return CTRL_STORE;
-    case 0x20:
-        return CTRL_JMP;
-    case 0x30:
-        return CTRL_DRAW;
+    case OP_MOV:
+        return OP_MOV;
+    case OP_MOVI:
+        return OP_MOVI;
+    case OP_ADD:
+        return OP_ADD;
+    case OP_SUB:
+        return OP_SUB;
+    case OP_AND:
+        return OP_AND;
+    case OP_OR:
+        return OP_OR;
+    case OP_XOR:
+        return OP_XOR;
+    case OP_NOT:
+        return OP_NOT;
+    case OP_SHL:
+        return OP_SHL;
+    case OP_SHR:
+        return OP_SHR;
+    case OP_LOAD:
+        return OP_LOAD;
+    case OP_STORE:
+        return OP_STORE;
+    case OP_JMP:
+        return OP_JMP;
+    case OP_JEQ:
+        return OP_JEQ;
+    case OP_JNE:
+        return OP_JNE;
+    case OP_PUSH:
+        return OP_PUSH;
+    case OP_POP:
+        return OP_POP;
+    case OP_CALL:
+        return OP_CALL;
+    case OP_RET:
+        return OP_RET;
+    case OP_DRAW:
+        return OP_DRAW;
     default:
-        return CTRL_UNKNOWN;
+        return OP_UNKNOWN;
     }
 }

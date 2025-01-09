@@ -1,7 +1,7 @@
-// bus.c
-#include "bus.h"
-#include "../memory/memory.h"
-#include "../io/io.h"
+#include "bus/bus.h"
+#include "memory/memory.h"
+#include "io/io.h"
+#include "cpu/opcode.h" // per MEMORY_SIZE
 
 uint32_t bus_read_word(uint32_t address)
 {
@@ -11,7 +11,10 @@ uint32_t bus_read_word(uint32_t address)
     }
     else
     {
-        return io_read(address - MEMORY_SIZE);
+        // Se l'indirizzo è >= MEMORY_SIZE, lo consideriamo "porte I/O"
+        // Ad esempio port = address - MEMORY_SIZE
+        uint32_t port = address - MEMORY_SIZE;
+        return io_read(port);
     }
 }
 
@@ -23,6 +26,7 @@ void bus_write_word(uint32_t address, uint32_t data)
     }
     else
     {
-        io_write(address - MEMORY_SIZE, data);
+        uint32_t port = address - MEMORY_SIZE;
+        io_write(port, data);
     }
 }
