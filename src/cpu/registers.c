@@ -1,3 +1,5 @@
+// src/cpu/registers.c
+
 #include "cpu/registers.h"
 #include <string.h>
 

@@ -1,3 +1,5 @@
+// src/cpu/alu.c
+
 #include "cpu/alu.h"
 #include "cpu/opcode.h" // Per FLAG_CARRY, FLAG_ZERO, ecc.
 

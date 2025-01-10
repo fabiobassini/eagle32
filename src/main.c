@@ -1,3 +1,5 @@
+// src/main.c
+
 #include "cpu/cpu.h"
 #include "memory/memory.h"
 #include "graphics/graphics.h"
