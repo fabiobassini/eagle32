@@ -1,4 +1,4 @@
-# 32-bit CPU Emulator with Assembler and OpenGL Graphics
+# Custom 32-bit CPU with Assembler and OpenGL Graphics
 
 <div align="center">
   <img src="assets/eagle32.webp" alt="Header" width="350"/>
